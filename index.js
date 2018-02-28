@@ -6,21 +6,21 @@ var $searchBtn = document.querySelector('#search');
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener('click', handleSearchButtonClick);
 
-// Set filteredAddresses to addressData initially
-// addressData comes from the addressData.js file
+// Set filtereddata to ufodata initially
+// ufodata comes from the ufodata.js file
 var filtereddata = ufodata;
 
-// renderTable renders the filteredAddresses to the tbody
+// renderTable renders the filtereddata to the tbody
 function renderTable() {
   $tbody.innerHTML = '';
   for (var i = 0; i < filtereddata.length; i++) {
-    // Get get the current address object and its fields
+    // Get get the current data object and its fieldkeys
     var selectufodata = filtereddata[i];
     var fieldkeys = Object.keys(selectufodata);
     // Create a new row in the tbody, set the index to be i + startingIndex
     var $row = $tbody.insertRow(i);
     for (var j = 0; j < fieldkeys.length; j++) {
-      // For every field in the address object, create a new cell at set its inner text to be the current value at the current address's field
+      // For every field in the data object, create a new cell at set its inner text to be the current value at the current data's field
       var fieldkey = fieldkeys[j];
       var $cell = $row.insertCell(j);
       $cell.innerText = selectufodata[fieldkey];
@@ -32,11 +32,11 @@ function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var ufodatadatetime = $datetimeInput.value.trim().toLowerCase();
 
-  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  // Set filtereddata to an array of all data whose "datetime" matches the filter
   filtereddata = ufodata.filter(function(ufosighting) {
     var ufosightingdatetime = ufosighting.datetime.toLowerCase();
 
-    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    // If true, add the address to the filtereddata, otherwise don't add it to filtereddata
     return ufosightingdatetime === ufodatadatetime;
   });
   renderTable();
